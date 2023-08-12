@@ -1,0 +1,81 @@
+"use strict";
+
+import { ShaderDoodleElement } from 'shader-doodle';
+import './style.css'
+import 'shader-doodle';
+
+// Logo movement
+const pos = { x: 0, y: 0 };
+
+const saveCursorPosition = function (x, y) {
+  pos.x = ((x - window.innerWidth / 2) / window.innerWidth).toFixed(2);
+  pos.y = ((y - window.innerHeight / 2) / window.innerHeight).toFixed(2);
+  document.documentElement.style.setProperty('--x', pos.x);
+  document.documentElement.style.setProperty('--y', pos.y);
+}
+
+const mapDeviceOrientationToCursorPosition = function (x, y) {
+}
+
+
+const isMobile = navigator.userAgentData.mobile;
+
+if (isMobile) {
+  console.log("MOBILE!");
+  window.addEventListener("deviceorientation", mapDeviceOrientationToCursorPosition, true);
+} else {
+  document.addEventListener('mousemove', e => { saveCursorPosition(e.clientX, e.clientY); })
+}
+
+// Shadertoy API service
+
+let shaderIds = [];
+let currentShader = 1;
+const API_KEY = "NtrlRN"; // TODO: Move to env var
+const SHADER_DISPLAY_TIME = 7_000;
+
+const createShaderDoodle = (shaderCode) => {
+  const doodle = new ShaderDoodleElement();
+  doodle.shadertoy = true;
+  doodle.id = "doodle";
+
+  const fs = document.createElement("script");
+  fs.type = "x-shader/x-fragment";
+  fs.text = shaderCode;
+
+  doodle.appendChild(fs);
+
+  document.body.querySelector("#doodle")?.remove();
+  document.body.appendChild(doodle);
+}
+
+const getUserShadersIds = async (username, apiKey) => {
+  // Get shader data from shadertoy API
+  const response = await fetch(`https://www.shadertoy.com/api/v1/shaders/query/${username}?key=${apiKey}`);
+  const data = await response.json();
+  return data.Results;
+}
+
+const getShaderData = async (id, apiKey) => {
+  // Get shader data from shadertoy API
+  const response = await fetch(`https://www.shadertoy.com/api/v1/shaders/${id}?key=${apiKey}`);
+  const shader = await response.json();
+  return shader.Shader;
+}
+
+const nextDoodle = async () => {
+  if (!shaderIds.length) {
+    console.log("Shader ids not loaded yet");
+    return;
+  }
+
+  const nextShader = await getShaderData(shaderIds[currentShader], API_KEY);
+  currentShader = (currentShader + 1) % shaderIds.length;
+  createShaderDoodle(nextShader.renderpass[0].code);
+};
+
+shaderIds = await getUserShadersIds("tanczmy", API_KEY);
+
+if (shaderIds.length) {
+  setInterval(nextDoodle, SHADER_DISPLAY_TIME);
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>duda.run</title>
+  <script type="module" src="/main.js"></script>
+</head>
+
+<body>
+  <div class="floating fullscreen flex-centered">
+    <h1 class="foreground interactive-shadow">
+      matiduda
+    </h1>
+  </div>
+  <shader-doodle id="doodle">
+    <script type="x-shader/x-fragment">
+      void main() {
+        vec2 st = gl_FragCoord.xy / u_resolution.xy;
+        vec3 color = vec3(st.x, st.y, abs(sin(u_time)));
+  
+        gl_FragColor = vec4(color, 1.0);
+      }
+    </script>
+  </shader-doodle>
+</body>
+
+</html>
