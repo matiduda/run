@@ -22,8 +22,8 @@ function scale(number, inMin, inMax, outMin, outMax) {
 }
 
 const handleOrientation = (event) => {
-  pos.x = scale(Math.abs(event.beta), 0, 180, -0.5, 0.5);
-  pos.y = scale(Math.abs(event.gamma), 0, 90, -0.5, 0.5);
+  pos.x = scale(Math.abs(event.gamma), -45, 45, -0.5, 0.5);
+  pos.y = scale(Math.abs(event.beta), 45, 90, -0.5, 0.5);
   document.documentElement.style.setProperty('--x', pos.x);
   document.documentElement.style.setProperty('--y', pos.y);
 }
