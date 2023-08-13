@@ -42,12 +42,6 @@ h1 {
   line-height: 1.1;
 }
 
-@media(max-width:768px) {
-  h1 {
-    font-size: 3.2em;
-  }
-}
-
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -171,4 +165,26 @@ shader-doodle {
 #shader-description {
   line-height: 0.35rem;
   margin: 0;
+}
+
+@media(max-width:768px) {
+  h1 {
+    font-size: 3.2em;
+  }
+
+  #infobox {
+    width: 200px;
+    padding: 15px;
+  }
+
+  #infobox h2 {
+    font-size: 0.8em;
+    height: 0;
+    line-height: 0.33rem;
+  }
+
+  #infobox h4 {
+    font-size: 0.6em;
+    line-height: 0.35rem;
+  }
 }
