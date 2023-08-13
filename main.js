@@ -22,11 +22,10 @@ function scale(number, inMin, inMax, outMin, outMax) {
 }
 
 const handleOrientation = (event) => {
-  const x = scale(event.beta, -180, 180, -0.5, 0.5);
-  const y = scale(event.gamma, -90, 90, -0.5, 0.5)
-  SHADER_NAME_CONTAINER.innerHTML = x;
-  SHADER_DESCRIPTION_CONTAINER.innerHTML = y;
-  saveCursorPosition(x, y);
+  pos.x = scale(Math.abs(event.beta), 0, 180, -0.5, 0.5);
+  pos.y = scale(Math.abs(event.gamma), 0, 90, -0.5, 0.5);
+  document.documentElement.style.setProperty('--x', pos.x);
+  document.documentElement.style.setProperty('--y', pos.y);
 }
 
 const isMobile = navigator.userAgentData.mobile;
