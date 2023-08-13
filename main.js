@@ -19,14 +19,15 @@ function scale(number, inMin, inMax, outMin, outMax) {
 }
 
 const handleOrientation = (event) => {
-  pos.x = scale(event.beta, -180, 180, -0.5, 0.5);
-  pos.y = scale(event.gamma, -90, 90, -0.5, 0.5);
+  saveCursorPosition(
+    scale(event.beta, -180, 180, -0.5, 0.5),
+    scale(event.gamma, -90, 90, -0.5, 0.5)
+  );
 }
 
 const isMobile = navigator.userAgentData.mobile;
 
 if (isMobile) {
-  console.log("MOBILE!");
   window.addEventListener("deviceorientation", handleOrientation, true);
 } else {
   document.addEventListener('mousemove', e => { saveCursorPosition(e.clientX, e.clientY); })
@@ -36,12 +37,11 @@ if (isMobile) {
 
 let shaderIds = [];
 let currentShader = 1;
-const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title");
-const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
 const API_KEY = "NtrlRN"; // TODO: Move to env var
 const SHADER_DISPLAY_TIME = 4_000;
 
-
+const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title");
+const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
 
 const createShaderDoodle = (shaderCode, title, description) => {
   const doodle = new ShaderDoodleElement();
