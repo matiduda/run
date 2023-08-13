@@ -31,10 +31,14 @@ if (isMobile) {
 
 let shaderIds = [];
 let currentShader = 1;
+const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title");
+const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
 const API_KEY = "NtrlRN"; // TODO: Move to env var
-const SHADER_DISPLAY_TIME = 7_000;
+const SHADER_DISPLAY_TIME = 4_000;
 
-const createShaderDoodle = (shaderCode) => {
+
+
+const createShaderDoodle = (shaderCode, title, description) => {
   const doodle = new ShaderDoodleElement();
   doodle.shadertoy = true;
   doodle.id = "doodle";
@@ -42,6 +46,13 @@ const createShaderDoodle = (shaderCode) => {
   const fs = document.createElement("script");
   fs.type = "x-shader/x-fragment";
   fs.text = shaderCode;
+
+  SHADER_NAME_CONTAINER.innerHTML = title.length
+    ? title
+    : "Untitled";
+  SHADER_DESCRIPTION_CONTAINER.innerHTML = description.length
+    ? description
+    : "No description";
 
   doodle.appendChild(fs);
 
@@ -68,10 +79,10 @@ const nextDoodle = async () => {
     console.log("Shader ids not loaded yet");
     return;
   }
-
   const nextShader = await getShaderData(shaderIds[currentShader], API_KEY);
   currentShader = (currentShader + 1) % shaderIds.length;
-  createShaderDoodle(nextShader.renderpass[0].code);
+
+  createShaderDoodle(nextShader.renderpass[0].code, nextShader.info.name, nextShader.info.description);
 };
 
 shaderIds = await getUserShadersIds("tanczmy", API_KEY);

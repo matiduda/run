@@ -15,16 +15,27 @@
       matiduda
     </h1>
   </div>
+
+  <div class="foreground" id="infobox">
+    <h2 id="shader-title">
+      Default
+    </h2>
+    <h4 id="shader-description">
+      No description
+    </h4>
+  </div>
+
   <shader-doodle id="doodle">
     <script type="x-shader/x-fragment">
       void main() {
         vec2 st = gl_FragCoord.xy / u_resolution.xy;
         vec3 color = vec3(st.x, st.y, abs(sin(u_time)));
-  
+        
         gl_FragColor = vec4(color, 1.0);
       }
     </script>
   </shader-doodle>
 </body>
+
 
 </html>
