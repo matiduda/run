@@ -7,6 +7,9 @@ import 'shader-doodle';
 // Logo movement
 const pos = { x: 0, y: 0 };
 
+const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title");
+const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
+
 function saveCursorPosition(x, y) {
   pos.x = ((x - window.innerWidth / 2) / window.innerWidth).toFixed(2);
   pos.y = ((y - window.innerHeight / 2) / window.innerHeight).toFixed(2);
@@ -19,10 +22,11 @@ function scale(number, inMin, inMax, outMin, outMax) {
 }
 
 const handleOrientation = (event) => {
-  saveCursorPosition(
-    scale(event.beta, -180, 180, -0.5, 0.5),
-    scale(event.gamma, -90, 90, -0.5, 0.5)
-  );
+  const x = scale(event.beta, -180, 180, -0.5, 0.5),
+  const y = scale(event.gamma, -90, 90, -0.5, 0.5)
+  SHADER_NAME_CONTAINER.innerHTML = x;
+  SHADER_DESCRIPTION_CONTAINER.innerHTML = y;
+  saveCursorPosition(x, y);
 }
 
 const isMobile = navigator.userAgentData.mobile;
@@ -39,9 +43,6 @@ let shaderIds = [];
 let currentShader = 1;
 const API_KEY = "NtrlRN"; // TODO: Move to env var
 const SHADER_DISPLAY_TIME = 4_000;
-
-const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title");
-const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
 
 const createShaderDoodle = (shaderCode, title, description) => {
   const doodle = new ShaderDoodleElement();
