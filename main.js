@@ -7,22 +7,33 @@ import 'shader-doodle';
 // Logo movement
 const pos = { x: 0, y: 0 };
 
-const saveCursorPosition = function (x, y) {
+function saveCursorPosition(x, y) {
   pos.x = ((x - window.innerWidth / 2) / window.innerWidth).toFixed(2);
   pos.y = ((y - window.innerHeight / 2) / window.innerHeight).toFixed(2);
   document.documentElement.style.setProperty('--x', pos.x);
   document.documentElement.style.setProperty('--y', pos.y);
 }
 
-const mapDeviceOrientationToCursorPosition = function (x, y) {
+function scale(number, inMin, inMax, outMin, outMax) {
+  return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
 
+function mapDeviceOrientationToCursorPosition(x, y) {
+  return {
+    x: scale(-180, 180, -0.5, 0.5),
+    y: scale(-90, 90, -0.5, 0.5)
+  };
+}
+
+function handleOrientation(event) {
+  pos = mapDeviceOrientationToCursorPosition(event.beta, event.gamma);
+}
 
 const isMobile = navigator.userAgentData.mobile;
 
 if (isMobile) {
   console.log("MOBILE!");
-  window.addEventListener("deviceorientation", mapDeviceOrientationToCursorPosition, true);
+  window.addEventListener("deviceorientation", handleOrientation, true);
 } else {
   document.addEventListener('mousemove', e => { saveCursorPosition(e.clientX, e.clientY); })
 }

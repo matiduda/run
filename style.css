@@ -36,9 +36,16 @@ body {
   min-height: 100svh;
 }
 
+
 h1 {
   font-size: 6.2em;
   line-height: 1.1;
+}
+
+@media(max-width:768px) {
+  h1 {
+    font-size: 3.2em;
+  }
 }
 
 #app {
@@ -140,18 +147,19 @@ shader-doodle {
     calc(var(--ds) * var(--x)) calc(var(--ds) * var(--y)) #3c1518,
     calc(2*var(--ds) * var(--x)) calc(2*var(--ds) * var(--y)) #d8115ac4,
     calc(3*var(--ds) * var(--x)) calc(3*var(--ds) * var(--y)) #293241,
-    calc(4*var(--ds) * var(--x)) calc(4*var(--ds) * var(--y)) #ffbd42c9,
-    calc(5*var(--ds) * var(--x)) calc(5*var(--ds) * var(--y)) #0496ff9f,
-    calc(5*var(--ds) * var(--x)) calc(5*var(--ds) * var(--y)) 20px #000000cc;
+    calc(4*var(--ds) * var(--x)) calc(4*var(--ds) * var(--y)) #ffbd42,
+    calc(5*var(--ds) * var(--x)) calc(5*var(--ds) * var(--y)) #0496ff,
+    calc(5*var(--ds) * var(--x)) calc(5*var(--ds) * var(--y)) 20px #000000;
 }
 
 #infobox {
-  background-color: #00000044;
+  background-color: #0000009c;
   border-radius: 6px;
   position: absolute;
   bottom: 0;
   margin: 20px;
   padding: 20px;
+  width: 300px;
 }
 
 #shader-title {
