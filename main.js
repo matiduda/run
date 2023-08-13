@@ -18,15 +18,9 @@ function scale(number, inMin, inMax, outMin, outMax) {
   return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
 
-function mapDeviceOrientationToCursorPosition(x, y) {
-  return {
-    x: scale(-180, 180, -0.5, 0.5),
-    y: scale(-90, 90, -0.5, 0.5)
-  };
-}
-
-function handleOrientation(event) {
-  pos = mapDeviceOrientationToCursorPosition(event.beta, event.gamma);
+const handleOrientation = (event) => {
+  pos.x = scale(event.beta, -180, 180, -0.5, 0.5);
+  pos.y = scale(event.gamma, -90, 90, -0.5, 0.5);
 }
 
 const isMobile = navigator.userAgentData.mobile;
