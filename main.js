@@ -5,10 +5,13 @@ import './style.css'
 import 'shader-doodle';
 
 // Logo movement
-const pos = { x: 0, y: 0 };
+const pos = { x: -0.35, y: -0.35 };
 
 const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title");
 const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
+
+document.documentElement.style.setProperty('--x', pos.x);
+document.documentElement.style.setProperty('--y', pos.y);
 
 function saveCursorPosition(x, y) {
   pos.x = ((x - window.innerWidth / 2) / window.innerWidth).toFixed(2);
