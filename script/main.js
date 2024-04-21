@@ -12,7 +12,7 @@ const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-descri
 
 // Wierd transitions fix
 setTimeout(() => {
-  document.body.style.setProperty("--shader-display-transition", "0.7s")
+  document.body.style.setProperty("--shader-display-transition", "0.7s opacity ease")
   document.body.style.setProperty("--menu-buttons-transition", "0.3s")
   document.body.style.setProperty("--infobox-center-transition", "250ms opacity ease")
   document.body.style.setProperty("--arrow-show-hide-transition", "1s")

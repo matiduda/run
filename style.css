@@ -164,7 +164,6 @@ shader-doodle {
   margin: 20px;
   padding: 20px;
   padding-top: 11px;
-  width: 300px;
   color: white;
   border-radius: 16px;
 }
@@ -179,8 +178,9 @@ shader-doodle {
 
 #infobox-center {
   background-color: #ffffff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 16px;
+  margin: 25px;
   color: #000000;
   opacity: 0;
   transition: var(--infobox-center-transition);
@@ -205,20 +205,17 @@ shader-doodle {
     font-size: 3.2em;
   }
 
-  #infobox {
-    width: 200px;
-    padding: 15px;
+  /* Move logo down */
+  .logo {
+    top: 100px;
   }
 
-  #infobox h2 {
-    font-size: 0.8em;
-    height: 0;
-    line-height: 0.33rem;
+  #infobox-center {
   }
 
-  #infobox h4 {
-    font-size: 0.6em;
-    line-height: 0.35rem;
+  .tabcontent {
+    max-height: 350px;
+    overflow-y: scroll;
   }
 }
 
@@ -327,7 +324,7 @@ shader-doodle {
 /* Style the tab content */
 .tabcontent {
   display: none;
-  padding: 6px 12px;
+  padding: 0px 16px;
 }
 
 /* Contact form styles */
