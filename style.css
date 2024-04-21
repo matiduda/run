@@ -207,14 +207,13 @@ shader-doodle {
 
   /* Move logo down */
   .logo {
-    top: 100px;
-  }
-
-  #infobox-center {
+    top: 90px;
+    left: auto;
+    right: 279px;
   }
 
   .tabcontent {
-    max-height: 350px;
+    max-height: 300px;
     overflow-y: scroll;
   }
 }
