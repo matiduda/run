@@ -1,14 +1,22 @@
 "use strict";
 
 import { ShaderDoodleElement } from 'shader-doodle';
-import './style.css'
+import '../style.css'
 import 'shader-doodle';
 
 // Logo movement
 const pos = { x: -0.35, y: -0.35 };
 
-const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title");
+const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title-text");
 const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
+
+// Wierd transitions fix
+setTimeout(() => {
+  document.body.style.setProperty("--shader-display-transition", "0.7s")
+  document.body.style.setProperty("--menu-buttons-transition", "0.3s")
+  document.body.style.setProperty("--infobox-center-transition", "250ms opacity ease")
+  document.body.style.setProperty("--arrow-show-hide-transition", "1s")
+}, 1);
 
 document.documentElement.style.setProperty('--x', pos.x);
 document.documentElement.style.setProperty('--y', pos.y);
@@ -39,6 +47,10 @@ if (isMobile) {
   document.addEventListener('mousemove', e => { saveCursorPosition(e.clientX, e.clientY); })
 }
 
+// Spinner
+
+const removeSpinner = () => document.querySelector("#loader")?.remove();
+
 // Shadertoy API service
 
 let shaderIds = [];
@@ -50,6 +62,7 @@ const createShaderDoodle = (shaderCode, title, description) => {
   const doodle = new ShaderDoodleElement();
   doodle.shadertoy = true;
   doodle.id = "doodle";
+  doodle.classList.add("doodle");
 
   const fs = document.createElement("script");
   fs.type = "x-shader/x-fragment";
@@ -64,8 +77,19 @@ const createShaderDoodle = (shaderCode, title, description) => {
 
   doodle.appendChild(fs);
 
-  document.body.querySelector("#doodle")?.remove();
+  let startingOpacity = 0;
+
+  const currentDoodle = document.body.querySelector("#doodle");
+  if (currentDoodle) {
+    currentDoodle.remove();
+    startingOpacity = 100;
+  }
+
+  doodle.style.opacity = startingOpacity;
   document.body.appendChild(doodle);
+  setTimeout(() => {
+    doodle.style.opacity = 100;
+  });
 }
 
 const getUserShadersIds = async (username, apiKey) => {
@@ -84,17 +108,20 @@ const getShaderData = async (id, apiKey) => {
 
 const nextDoodle = async () => {
   if (!shaderIds.length) {
-    console.log("Shader ids not loaded yet");
+    console.log("[duduAPI] Shader ids not loaded yet");
     return;
   }
   const nextShader = await getShaderData(shaderIds[currentShader], API_KEY);
+  removeSpinner();
+
   currentShader = (currentShader + 1) % shaderIds.length;
 
   createShaderDoodle(nextShader.renderpass[0].code, nextShader.info.name, nextShader.info.description);
 };
 
-shaderIds = await getUserShadersIds("tanczmy", API_KEY);
-
-if (shaderIds.length) {
+getUserShadersIds("tanczmy", API_KEY).then(fetchedIds => {
+  console.log("[duduAPI] Shader ID's loaded from ShaderToy API")
+  shaderIds = fetchedIds;
+  nextDoodle();
   setInterval(nextDoodle, SHADER_DISPLAY_TIME);
-}
+});
