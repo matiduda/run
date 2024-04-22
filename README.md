@@ -1,4 +1,4 @@
-# Shader showcase
+# [Personal website](https://matiduda.netlify.app)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d1956517-5ec6-414c-a859-38464adcc55a/deploy-status)](https://app.netlify.com/sites/matiduda/deploys)
 
