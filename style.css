@@ -356,3 +356,11 @@ shader-doodle {
 .card-button {
   margin-top: 20px;
 }
+
+/* API not responding text */
+
+#api-not-responding {
+  margin-top: 120px;
+  opacity: 0;
+  transition: var(--shader-display-transition);
+}

@@ -9,6 +9,7 @@ const pos = { x: -0.35, y: -0.35 };
 
 const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title-text");
 const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
+const API_NOT_RESPONDING_TEXT = document.body.querySelector("#api-not-responding");
 
 // Wierd transitions fix
 setTimeout(() => {
@@ -61,6 +62,7 @@ let shaderIds = [];
 let currentShader = 1;
 const API_KEY = "NtrlRN"; // TODO: Move to env var
 const SHADER_DISPLAY_TIME = 4_000;
+const API_NOT_RESPONDING_TIME = 5_000;
 
 const createShaderDoodle = (shaderCode, title, description) => {
   const doodle = new ShaderDoodleElement();
@@ -123,12 +125,23 @@ const nextDoodle = async () => {
   createShaderDoodle(nextShader.renderpass[0].code, nextShader.info.name, nextShader.info.description);
 };
 
+const displayAPINotRespondingText = () => {
+  if (shaderIds.length) {
+    // Shaders are loaded
+    return;
+  }
+  API_NOT_RESPONDING_TEXT.style.opacity = 1;
+}
+
 getUserShadersIds("tanczmy", API_KEY).then(fetchedIds => {
   console.log("[duduAPI] Shader ID's loaded from ShaderToy API")
   shaderIds = fetchedIds;
+  API_NOT_RESPONDING_TEXT.style.opacity = 0;
   nextDoodle();
   setInterval(nextDoodle, SHADER_DISPLAY_TIME);
 });
+
+setInterval(displayAPINotRespondingText, API_NOT_RESPONDING_TIME);
 
 // Tabs
 
