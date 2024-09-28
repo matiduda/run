@@ -55,8 +55,8 @@ h1 {
 .logo {
   transform: scale(0.2, 0.2);
   position: fixed;
-  top: 35px;
-  left: 35px;
+  top: 40px;
+  left: 40px;
   padding: 0;
   margin: 0;
   width: 0;
@@ -150,18 +150,18 @@ shader-doodle {
 .interactive-shadow {
   transform: translate(calc(var(--ts)*var(--x)), calc(var(--ts)*var(--y)));
   box-shadow:
-    calc(var(--ds) * var(--x)) calc(var(--ds) * var(--y)) #3c1518,
-    calc(2*var(--ds) * var(--x)) calc(2*var(--ds) * var(--y)) #d8115ac4,
-    calc(3*var(--ds) * var(--x)) calc(3*var(--ds) * var(--y)) #293241,
-    calc(4*var(--ds) * var(--x)) calc(4*var(--ds) * var(--y)) #ffbd42,
-    calc(5*var(--ds) * var(--x)) calc(5*var(--ds) * var(--y)) #0496ff
+    calc(1*var(--ds) * var(--x)) calc(1*var(--ds) * var(--y)) #00000020,
+    calc(2*var(--ds) * var(--x)) calc(2*var(--ds) * var(--y)) #00000020,
+    calc(3*var(--ds) * var(--x)) calc(3*var(--ds) * var(--y)) #00000020,
+    calc(4*var(--ds) * var(--x)) calc(4*var(--ds) * var(--y)) #00000020,
+    calc(5*var(--ds) * var(--x)) calc(5*var(--ds) * var(--y)) #00000020
 }
 
 #infobox {
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 20px;
+  margin: 40px;
   padding: 20px;
   padding-top: 11px;
   color: white;
@@ -207,9 +207,9 @@ shader-doodle {
 
   /* Move logo down */
   .logo {
-    top: 90px;
+    top: 120px;
     left: auto;
-    right: 279px;
+    right: 200px;
   }
 
   .tabcontent {
@@ -250,8 +250,8 @@ shader-doodle {
 
 .arrow {
   position: fixed;
-  top: 40px;
-  right: 370px;
+  top: 60px;
+  right: 380px;
   transform: translate(-50%, -50%);
   transform: rotate(270deg);
   transition: var(--arrow-show-hide-transition);
@@ -297,7 +297,7 @@ shader-doodle {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 20px;
+  margin: 40px;
 }
 
 /* Style the buttons that are used to open the tab content */
