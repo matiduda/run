@@ -10,6 +10,7 @@ const pos = { x: -0.35, y: -0.35 };
 const SHADER_NAME_CONTAINER = document.body.querySelector("#shader-title-text");
 const SHADER_DESCRIPTION_CONTAINER = document.body.querySelector("#shader-description");
 const API_NOT_RESPONDING_TEXT = document.body.querySelector("#api-not-responding");
+const SHADER_BACKGROUND = document.body.querySelector("#shader-background");
 
 // Wierd transitions fix
 setTimeout(() => {
@@ -60,6 +61,8 @@ const removeSpinner = () => document.querySelector("#loader")?.remove();
 
 let shaderIds = [];
 let currentShader = 1;
+let initialized = false;
+
 const API_KEY = "NtrlRN"; // TODO: Move to env var
 const SHADER_DISPLAY_TIME = 7_000;
 const API_NOT_RESPONDING_TIME = 5_000;
@@ -96,6 +99,8 @@ const createShaderDoodle = (shaderCode, title, description) => {
   setTimeout(() => {
     doodle.style.opacity = 100;
   });
+
+  initialized = true;
 }
 
 const getUserShadersIds = async (username, apiKey) => {
@@ -122,6 +127,10 @@ const nextDoodle = async () => {
 
   currentShader = (currentShader + 1) % shaderIds.length;
 
+  if (initialized && currentShaderLocked) {
+    return;
+  }
+
   createShaderDoodle(nextShader.renderpass[0].code, nextShader.info.name, nextShader.info.description);
 };
 
@@ -143,7 +152,7 @@ getUserShadersIds("tanczmy", API_KEY).then(fetchedIds => {
 
 setInterval(displayAPINotRespondingText, API_NOT_RESPONDING_TIME);
 
-// Tabs
+// Tab buttons
 
 let arrowShowTimeoutId = null;
 
@@ -174,7 +183,6 @@ function openTab(event, tabName) {
     tablinks[i].style.color = "#ffffff";
   }
 
-
   // Show the specific tab content
   const tab = document.getElementById(tabName);
   tab.style.display = "block";
@@ -191,9 +199,32 @@ function openTab(event, tabName) {
   currentButton.style.color = "#000000";
 }
 
+// Shader lock button
+
+let currentShaderLocked = false;
+const SHADER_LOCKED_TEXT = document.body.querySelector("#locked-text");
+
+function toggleShaderLock(event) {
+  currentShaderLocked = !currentShaderLocked;
+
+  const button = event.target;
+
+  if (currentShaderLocked) {
+    SHADER_LOCKED_TEXT.style.opacity = 100;
+    button.style.backgroundColor = "#ffffff88";
+    button.style.color = "#000000";
+  } else {
+    SHADER_LOCKED_TEXT.style.opacity = 0;
+    button.style.backgroundColor = "";
+    button.style.color = "#ffffff";
+  }
+
+}
+
 document.querySelector("#aboutmeButton").addEventListener("click", (event) => openTab(event, 'aboutme'))
 document.querySelector("#projectsButton").addEventListener("click", (event) => openTab(event, 'projects'))
 document.querySelector("#contactButton").addEventListener("click", (event) => openTab(event, 'contact'))
+document.querySelector("#lockShaderButton").addEventListener("click", (event) => toggleShaderLock(event))
 
 function hideArrow() {
   if (arrowShowTimeoutId) {

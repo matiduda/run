@@ -218,6 +218,22 @@ shader-doodle {
   }
 }
 
+
+@media(max-width:500px) {
+  /* Hide arrow because of no space */
+  .arrow {
+    display: none;
+  }
+
+  #locked-text {
+    display: none;
+  }
+}
+
+
+
+
+
 /* Loading spinner */
 
 .loader {
@@ -251,7 +267,7 @@ shader-doodle {
 .arrow {
   position: fixed;
   top: 60px;
-  right: 380px;
+  right: 450px;
   transform: translate(-50%, -50%);
   transform: rotate(270deg);
   transition: var(--arrow-show-hide-transition);
@@ -290,7 +306,6 @@ shader-doodle {
   }
 }
 
-
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -307,6 +322,7 @@ shader-doodle {
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
+  margin-bottom: 4px;
   transition: var(--menu-buttons-transition); 
 }
 
@@ -364,3 +380,13 @@ shader-doodle {
   opacity: 0;
   transition: var(--shader-display-transition);
 }
+
+#locked-text {
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(-100px, 13px);
+  transition: var(--menu-buttons-transition); 
+}
+
