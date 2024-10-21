@@ -61,7 +61,7 @@ const removeSpinner = () => document.querySelector("#loader")?.remove();
 let shaderIds = [];
 let currentShader = 1;
 const API_KEY = "NtrlRN"; // TODO: Move to env var
-const SHADER_DISPLAY_TIME = 4_000;
+const SHADER_DISPLAY_TIME = 7_000;
 const API_NOT_RESPONDING_TIME = 5_000;
 
 const createShaderDoodle = (shaderCode, title, description) => {
