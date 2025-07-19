@@ -38,6 +38,7 @@ body {
   --infobox-center-transition: 0s;
   --arrow-show-hide-transition: 0s;
   --shader-display-transition: 0s;
+  background-color: #000000;
 }
 
 h1 {
