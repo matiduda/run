@@ -170,6 +170,20 @@ shader-doodle {
   border-radius: 16px;
 }
 
+#nasze-auto-infobox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  margin: 40px;
+  padding: 20px;
+  padding-top: 15px;
+  background-color: white;
+  border-radius: 16px;
+}
+
 .glass-background {
   /* From https://css.glass */
   background: rgba(133, 133, 133, 0.288);
@@ -197,9 +211,15 @@ shader-doodle {
 
 #shader-description {
   color: #ffffff;
-
   line-height: 0.35rem;
   margin: 0;
+}
+
+#nasze-auto-description {
+  color: #0099cb;
+  line-height: 0.35rem;
+  margin: 0;
+  margin-top: 0.5rem;
 }
 
 @media(max-width:800px) {
@@ -219,10 +239,29 @@ shader-doodle {
     max-height: 300px;
     overflow-y: scroll;
   }
+
+  #nasze-auto-infobox {
+    display: block;
+    top: 80px;
+    right: 0;
+    left: auto;
+    bottom: auto;
+  }
+
+  #nasze-auto-description {
+    display: none;
+  }
+
+  #nasze-auto-logo {
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 150px;
+  }
 }
 
 
 @media(max-width:500px) {
+
   /* Hide arrow because of no space */
   .arrow {
     display: none;
@@ -249,20 +288,53 @@ shader-doodle {
     l20-1 0.8s infinite linear alternate,
     l20-2 1.6s infinite linear;
 }
-@keyframes l20-1{
-   0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
-   12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
-   25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
-   50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
-   75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
-   100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+
+@keyframes l20-1 {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 50% 0%, 50% 0%, 50% 0%, 50% 0%)
+  }
+
+  12.5% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 0%)
+  }
+
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 100% 100%, 100% 100%)
+  }
+
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 50% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  62.5% {
+    clip-path: polygon(50% 50%, 100% 0, 100% 0%, 100% 0%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  75% {
+    clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 50% 100%, 0% 100%)
+  }
+
+  100% {
+    clip-path: polygon(50% 50%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 50% 100%, 0% 100%)
+  }
 }
-@keyframes l20-2{ 
-  0%    {transform:scaleY(1)  rotate(0deg)}
-  49.99%{transform:scaleY(1)  rotate(135deg)}
-  50%   {transform:scaleY(-1) rotate(0deg)}
-  100%  {transform:scaleY(-1) rotate(-135deg)}
+
+@keyframes l20-2 {
+  0% {
+    transform: scaleY(1) rotate(0deg)
+  }
+
+  49.99% {
+    transform: scaleY(1) rotate(135deg)
+  }
+
+  50% {
+    transform: scaleY(-1) rotate(0deg)
+  }
+
+  100% {
+    transform: scaleY(-1) rotate(-135deg)
+  }
 }
 
 /* Animated arrow */
@@ -297,15 +369,17 @@ shader-doodle {
 
 @keyframes animate {
   0% {
-      opacity: 0;
-      transform: rotate(45deg) translate(-20px, -20px);
+    opacity: 0;
+    transform: rotate(45deg) translate(-20px, -20px);
   }
+
   50% {
-      opacity: 1;
+    opacity: 1;
   }
+
   100% {
-      opacity: 0;
-      transform: rotate(45deg) translate(20px, 20px);
+    opacity: 0;
+    transform: rotate(45deg) translate(20px, 20px);
   }
 }
 
@@ -326,7 +400,7 @@ shader-doodle {
   padding: 14px 20px;
   margin-bottom: 4px;
   margin-left: 3px;
-  transition: var(--menu-buttons-transition); 
+  transition: var(--menu-buttons-transition);
 }
 
 /* Change background color of buttons on hover */
@@ -390,7 +464,7 @@ shader-doodle {
   bottom: 0;
   left: 0;
   transform: translate(-100px, 13px);
-  transition: var(--menu-buttons-transition); 
+  transition: var(--menu-buttons-transition);
 }
 
 /* Logo animation */
@@ -455,7 +529,7 @@ shader-doodle {
 
 .svg-elem-1 {
   -webkit-animation: animate-svg-stroke-1 15s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s both,
-                       animate-svg-fill-1 1s cubic-bezier(0.23, 1, 0.32, 1) 4.8s both;
-          animation: animate-svg-stroke-1 15s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s both,
-               animate-svg-fill-1 1s cubic-bezier(0.23, 1, 0.32, 1) 4.8s both;
+    animate-svg-fill-1 1s cubic-bezier(0.23, 1, 0.32, 1) 4.8s both;
+  animation: animate-svg-stroke-1 15s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s both,
+    animate-svg-fill-1 1s cubic-bezier(0.23, 1, 0.32, 1) 4.8s both;
 }
