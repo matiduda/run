@@ -200,6 +200,7 @@ shader-doodle {
   color: #000000;
   opacity: 0;
   transition: var(--infobox-center-transition);
+  z-index: 2;
 }
 
 #shader-title {
